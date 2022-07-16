@@ -15,6 +15,8 @@ class TutoriasPage extends StatelessWidget {
     Color(0xff3C3C41),
   ];
 
+  String valor = 'Tópicos de programación';
+
   final List iconos = [
     Icons.book,
     Icons.article,
@@ -23,6 +25,85 @@ class TutoriasPage extends StatelessWidget {
   ];
 
   final rng = Random();
+  void dialogo(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Ingresa tus datos para solicitar tutoría'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Correo electrónico'),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Escriba su correo electrónico',
+                ),
+              ),
+              SizedBox(height: 30),
+              Text('Materia'),
+              DropdownButton(
+                value: valor,
+                items: const [
+                  DropdownMenuItem(
+                      value: 'Matemáticas', child: Text('Matemáticas')),
+                  DropdownMenuItem(
+                      value: 'Ingeniería', child: Text('Ingeniería')),
+                  DropdownMenuItem(
+                      value: 'Electrónica', child: Text('Electrónica')),
+                  DropdownMenuItem(
+                      value: 'Tópicos de programación',
+                      child: Text('Tópicos de programación')),
+                  DropdownMenuItem(
+                      value: 'Programación avanzada',
+                      child: Text('Programación avanzada')),
+                ],
+                onChanged: (String? value) {
+                  valor = value!;
+                },
+              ),
+              SizedBox(height: 30),
+              Text('Tema'),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Escriba el tema',
+                ),
+              ),
+              SizedBox(height: 30),
+              Text('Descrición'),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Escriba la descripción',
+                ),
+              ),
+              SizedBox(height: 30),
+              Text('Agregar PDF de apoyo'),
+              SizedBox(height: 10),
+              FlatButton(
+                child: Text('Subir PDF'),
+                color: Colors.red,
+                textColor: Colors.white,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('aceptar'),
+              color: Colors.blue,
+              textColor: Colors.white,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,8 +276,30 @@ class TutoriasPage extends StatelessWidget {
                               onPressed: () {},
                             ),
                           ),
+                          const SizedBox(height: 10),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: MaterialButton(
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              textColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 30, vertical: 20),
+                              color: Colors.blueGrey,
+                              child: const Text(
+                                'Solicitar Tutoría',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w100,
+                                ),
+                              ),
+                              onPressed: () {
+                                dialogo(context);
+                              },
+                            ),
+                          ),
                           const SizedBox(height: 20),
-                          Text(
+                          const Text(
                             '1 resultado',
                             textAlign: TextAlign.left,
                             style: TextStyle(
@@ -216,7 +319,7 @@ class TutoriasPage extends StatelessWidget {
                                   }));
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                     right: 20,
                                   ),
                                   child: Material(
@@ -235,7 +338,8 @@ class TutoriasPage extends StatelessWidget {
                                             height: 60,
                                             decoration: BoxDecoration(
                                               color: colores[rng.nextInt(4)],
-                                              borderRadius: BorderRadius.only(
+                                              borderRadius:
+                                                  const BorderRadius.only(
                                                 topLeft: Radius.circular(6),
                                                 topRight: Radius.circular(6),
                                               ),
@@ -259,7 +363,7 @@ class TutoriasPage extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Positioned(
+                                          const Positioned(
                                             top: 100,
                                             left: 30,
                                             child: Text(
@@ -272,7 +376,7 @@ class TutoriasPage extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Positioned(
+                                          const Positioned(
                                             top: 120,
                                             left: 30,
                                             child: Text(
@@ -313,8 +417,8 @@ class TutoriasPage extends StatelessWidget {
                                               starSpacing: 2,
                                               maxValueVisibility: true,
                                               valueLabelVisibility: true,
-                                              animationDuration:
-                                                  Duration(milliseconds: 1000),
+                                              animationDuration: const Duration(
+                                                  milliseconds: 1000),
                                               valueLabelPadding:
                                                   const EdgeInsets.symmetric(
                                                       vertical: 1,
@@ -327,13 +431,13 @@ class TutoriasPage extends StatelessWidget {
                                               starColor: Colors.grey.shade700,
                                             ),
                                           ),
-                                          Positioned(
+                                          const Positioned(
                                             child: Divider(),
                                             top: 200,
                                             left: 30,
                                             right: 30,
                                           ),
-                                          Positioned(
+                                          const Positioned(
                                             top: 220,
                                             right: 30,
                                             child: Text(
